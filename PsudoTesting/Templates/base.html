@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Optimizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+          background-color:#181C14;
+          text-align: center;
+          color:#ECDFCC;
+          font-family:"Poppins","sans-serif";
+        }
+
+        * { color:#ECDFCC; text-decoration: none;}
+
+        form {
+        display:inline-block;
+        border:7px double #697565;
+        text-align:left;
+        padding:50px;
+        }
+
+        input {
+          width: 400px;
+          background: none;
+          border: 2px solid #7C7C7C;
+          padding: 1.5rem;
+          margin:10px 0px 20px 0px;
+          font-size:20px;
+          &:focus {
+            border-color: white;
+            outline: 0;
+          }
+        }
+        label {
+        font-size:20px;
+        margin:5px;
+
+        }
+        button {
+          background: #3C3D37;
+          color: white;
+          border: 0;
+          text-transform: uppercase;
+          padding: 1.5rem;
+          font-size: 1.0rem;
+          letter-spacing: 0.1rem;
+        }
+        textarea{
+        margin-bottom:10px;
+        background:none;
+        width:450px;
+        height:400px;
+        font-size:30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1> Let's
+      <a href="" class="typewrite" data-period="2000" data-type='[ "develope", "generate", "optimize", "learn","try","lose","win","Create a better world" ]'>
+        <span class="wrap"></span>
+      </a> togeather.
+    </h1>
+</body>
+<script>
+    var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+</script>
+{% block start %}
+{% endblock %}
+
+</html>

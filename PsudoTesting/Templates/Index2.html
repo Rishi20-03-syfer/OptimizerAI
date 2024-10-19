@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal AI Agent - Dark Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #181C14;
+            --color-text: #ECDFCC;
+            --color-accent: #697565;
+            --color-secondary: #3C3D37;
+            --color-card-bg: #222720;
+        }
+        body {
+            font-family: "Poppins", "sans-serif";
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: "Sixtyfour Convergence", "sans-serif";
+        }
+        .card {
+            background-color: var(--color-card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .card-title {
+            color: var(--color-accent);
+            margin-top: 0;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--color-accent);
+        }
+        textarea, input[type="file"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid var(--color-secondary);
+            border-radius: 4px;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+        button {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: var(--color-text);
+            color: var(--color-bg);
+        }
+        .file-input-button {
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+        }
+        .file-input-button:hover {
+            background-color: var(--color-accent);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .recording {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        #imagePreview img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .auto-grow-input {
+            min-height: 50px;
+            padding: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+            overflow: hidden;
+            transition: height 0.2s ease;
+        }
+        .auto-grow-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: var(--color-card-bg);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+        }
+        .sidenav a:hover {
+            color: var(--color-accent);
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+        #openNav {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>  
+    <span id="openNav" onclick="openNav()">&#9776;</span>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/">Home</a>
+            <a href="experiments">Experiments</a>
+            <a href="feedback">Feedback</a>
+            <a href="about">About</a>
+            <a href="help">Help</a>
+            <a href="login_page">Logout</a>
+        </div>
+
+    <div id="main">
+        <div class="container">
+            <h1>Optimizer AI</h1>
+
+            <form method="post" enctype="multipart/form-data" id="aiForm">
+                {% csrf_token %}
+                <div class="card">
+                    <h2 class="card-title">Text Input</h2>
+                    <div class="input-group">
+                        <textarea class="auto-grow-input" name="text" id="textInput" required rows="1" placeholder="Enter your text here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h2 class="card-title">Image Input</h2>
+                        <div class="input-group">
+                            <input name="image" type="file" accept="image/*" id="imageInput" hidden>
+                            <button type="button" class="file-input-button" onclick="document.getElementById('imageInput').click()">Choose Image</button>
+                        </div>
+                        <div id="imagePreview"></div>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="card-title">Document Input</h2>
+                        <div class="input-group">
+                            <input name="file" type="file" accept=".docx,.pdf,.txt" id="documentInput" hidden>
+                            <button type="button" class="file-input-button" onclick="document.getElementById('documentInput').click()">Choose Document</button>
+                        </div>
+                        <div id="documentName"></div>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="card-title">Voice Input</h2>
+                        <div class="input-group">
+                            <button type="button" id="recordButton" class="file-input-button" onclick="voice()">Start Recording</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" style="width: 100%; margin-top: 20px;">Submit to AI</button>
+            </form>
+
+            <div class="card" style="margin-top: 30px;">
+                <h2 class="card-title">AI Output</h2>
+                <div class="input-group">
+                    <span class="textarea" role="textbox"  aria-readonly="true" aria-placeholder="Ai output will appear here...">{{response|safe}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    
+                    const previewDiv = document.getElementById('imagePreview');
+                    previewDiv.innerHTML = '';
+                    previewDiv.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('documentInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('documentName').textContent = `Selected file: ${file.name}`;
+            }
+        });
+
+        function voice(){
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-GB";
+            recognition.onresult = function(event){
+                console.log(event);
+                document.getElementById('textInput').value = event.results[0][0].transcript;
+            }
+            recognition.start();
+        }
+
+        const autoGrowInput = document.querySelector('.auto-grow-input');
+
+        autoGrowInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // Initialize the input box height
+        autoGrowInput.style.height = 'auto';
+        autoGrowInput.style.height = autoGrowInput.scrollHeight + 'px';
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+</body>
+</html>
