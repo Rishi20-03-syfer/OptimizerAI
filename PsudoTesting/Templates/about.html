@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Our Multimodal AI Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #181C14;
+            --color-text: #ECDFCC;
+            --color-accent: #697565;
+            --color-secondary: #3C3D37;
+            --color-card-bg: #222720;
+        }
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            transition: margin-left .5s;
+        }
+        h1, h2 {
+            font-family: "Sixtyfour Convergence", sans-serif;
+            color: var(--color-accent);
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+        }
+        p {
+            margin-bottom: 1.5rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-card {
+            background-color: var(--color-card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .feature-card h3 {
+            color: var(--color-accent);
+            margin-top: 0;
+        }
+        .team-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .team-member {
+            background-color: var(--color-card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        /* Side Navbar Styles */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: var(--color-card-bg);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+        }
+        .sidenav a:hover {
+            color: var(--color-accent);
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+        #openNav {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            color: var(--color-text);
+        }
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+</head>
+<body>
+    <span id="openNav" onclick="openNav()">&#9776;</span>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/">Home</a>
+        <a href="experiments">Experiments</a>
+        <a href="feedback">Feedback</a>
+        <a href="about">About</a>
+        <a href="help">Help</a>
+        <a href="login_page">Logout</a>
+    </div>
+
+    <div id="main">
+        <div class="container">
+            <h1>About Our Multimodal AI Agent</h1>
+            
+            <p>Welcome to the cutting-edge world of our Multimodal AI Agent. We're pushing the boundaries of artificial intelligence by creating an agent that can understand and process multiple forms of input, including text, images, documents, and voice.</p>
+            
+            <h2>Our Mission</h2>
+            <p>Our mission is to develop an AI that can seamlessly integrate various forms of data, providing more natural and comprehensive interactions between humans and machines. We believe that by combining different modalities, we can create an AI that truly understands context and nuance, leading to more accurate and helpful responses.</p>
+            
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Text Processing</h3>
+                    <p>Advanced natural language processing capabilities for understanding and generating human-like text.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Image Analysis</h3>
+                    <p>State-of-the-art computer vision algorithms for recognizing and describing visual content.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Document Understanding</h3>
+                    <p>Ability to extract and comprehend information from various document formats.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Voice Recognition</h3>
+                    <p>Accurate speech-to-text conversion and voice command interpretation.</p>
+                </div>
+            </div>
+            
+            <h2>Our Approach</h2>
+            <p>We utilize cutting-edge machine learning techniques, including deep neural networks and transformer models, to create a truly intelligent and adaptable AI agent. Our approach focuses on continuous learning and improvement, ensuring that our AI stays at the forefront of technological advancements.</p>
+            
+            <div class="team-section">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://picsum.photos/200" alt="Team Member 1">
+                        <h3>Dr. Jane Doe</h3>
+                        <p>Lead AI Researcher</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://picsum.photos/201" alt="Team Member 2">
+                        <h3>John Smith</h3>
+                        <p>Senior Software Engineer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://picsum.photos/202" alt="Team Member 3">
+                        <h3>Emily Chen</h3>
+                        <p>Data Scientist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+</body>
+</html>

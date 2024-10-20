@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Multimodal AI Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("service_ug58xjo"); // Replace with your EmailJS user ID
+        })();
+    </script>
+    <style>
+      :root {
+            --color-bg: #181C14;
+            --color-text: #ECDFCC;
+            --color-accent: #697565;
+            --color-secondary: #3C3D37;
+            --color-card-bg: #222720;
+        }
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            transition: margin-left .5s;
+        }
+        h1 {
+            font-family: "Sixtyfour Convergence", sans-serif;
+            color: var(--color-text);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .feedback-form {
+            background-color: var(--color-card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-secondary);
+            border-radius: 4px;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: var(--color-text);
+            color: var(--color-bg);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .success {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .error {
+            background-color: #f44336;
+            color: white;
+        }
+        /* Side Navbar Styles */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: var(--color-card-bg);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+        }
+        .sidenav a:hover {
+            color: var(--color-accent);
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+        #openNav {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            color: var(--color-text);
+        }
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+    </head>
+<body>
+  <span id="openNav" onclick="openNav()">&#9776;</span>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/">Home</a>
+    <a href="experiments">Experiments</a>
+    <a href="feedback">Feedback</a>
+    <a href="about">About</a>
+    <a href="help">Help</a>
+    <a href="login_page">Logout</a>
+</div>
+ <div id="main">
+        <div class="container">
+            <h1>Feedback</h1>
+            <div class="feedback-form">
+              <form id="form">
+                <div class="form-group">
+                  <label for="name">name</label>
+                  <input type="text" name="name" id="name">
+                </div>
+                <div class="form-group">
+                  <label for="message">message</label>
+                  <textarea type="text" name="message" id="message" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="feedbackType">feedbackType</label>
+                  <!-- <input type="text" name="feedbackType" id="feedbackType"> -->
+                  <select id="feedbackType" name="feedbackType" required>
+                            <option value="">Select a type</option>
+                            <option value="general">General Feedback</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="other">Other</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                  <label for="email">email</label>
+                  <input type="text" name="email" id="email">
+                </div>
+
+                <input type="submit" id="button" value="Send Email" >
+              </form>
+              <div id="responseMessage" class="message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('916DyepYxYsadSLYk')
+</script>
+
+</body>
+<script>
+  function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+  const btn = document.getElementById('button');
+
+document.getElementById('form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Sending...';
+
+   const serviceID = 'service_ug58xjo';
+   const templateID = 'template_u5d861r';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.textContent = 'Send Email';
+      alert('Sent!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+</script>
+</html>

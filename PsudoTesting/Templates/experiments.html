@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Experiments - Text to Image & Text to Music</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #181C14;
+            --color-text: #ECDFCC;
+            --color-accent: #697565;
+            --color-secondary: #3C3D37;
+            --color-card-bg: #222720;
+        }
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            transition: margin-left .5s;
+        }
+        h1 {
+            font-family: "Sixtyfour Convergence", sans-serif;
+            color: var(--color-text);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .experiments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .experiment {
+            background-color: var(--color-card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experiment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .experiment h2 {
+            color: var(--color-accent);
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--color-secondary);
+            border-radius: 4px;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: inherit;
+            resize: vertical;
+        }
+        button {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: var(--color-text);
+            color: var(--color-bg);
+        }
+        .output {
+            margin-top: 1rem;
+            border: 1px solid var(--color-secondary);
+            border-radius: 4px;
+            padding: 1rem;
+            min-height: 200px;
+            background-color: var(--color-bg);
+        }
+        #imageOutput img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        #audioOutput audio {
+            width: 100%;
+        }
+        .loading {
+            text-align: center;
+            font-style: italic;
+            color: var(--color-accent);
+        }
+        /* Side Navbar Styles */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: var(--color-card-bg);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+        }
+        .sidenav a:hover {
+            color: var(--color-accent);
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+        #openNav {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            color: var(--color-text);
+        }
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <span id="openNav" onclick="openNav()">&#9776;</span>
+
+    
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/">Home</a>
+        <a href="experiments">Experiments</a>
+        <a href="feedback">Feedback</a>
+        <a href="about">About</a>
+        <a href="help">Help</a>
+        <a href="login_page">Logout</a>
+    </div>
+
+<form method="post"enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div id="main">
+        <div class="container">
+            <h1>AI Experiments</h1>
+            <div class="experiments">
+                <div class="experiment">
+                    <h2>Text to Image</h2>
+                    <div class="input-group">
+                        <label for="imagePrompt">Enter your image description:</label>
+                        <textarea id="imagePrompt" rows="4" name="text1" placeholder="A serene landscape with mountains and a lake..." value=""></textarea>
+                    </div>
+                    <button type="submit">Generate Image</button>
+                    <div id="imageOutput" class="output">
+                        {% if image %}
+                            <img src="{{ image }}" alt="Generated Image">
+                        {% else %}
+                            <p>No image generated yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="experiment">
+                    <h2>Text to Music</h2>
+                    <div class="input-group">
+                        <label for="musicPrompt">Describe the music you want:</label>
+                        <textarea id="musicPrompt" rows="4" name="text2"placeholder="A calm piano melody with soft strings..." value=" "></textarea>
+                    </div>
+                    <button type="submit">Generate Music</button>
+                    <div id="audioOutput" class="output">
+                        {% if audio %}
+                            <audio controls>
+                                <source src="{{ audio }}" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                        {% else %}
+                            <p>No music generated yet.</p>
+                        {% endif %} 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+</body>
+</html>
+
+
