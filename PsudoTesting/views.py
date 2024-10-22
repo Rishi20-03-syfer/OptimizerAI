@@ -1,3 +1,5 @@
+from PIL import Image
+import io
 from transformers import pipeline
 from django.conf import settings
 from django.shortcuts import render # for the html pages
@@ -129,7 +131,7 @@ def feedback(request):
 
 
 def query(payload):
-    API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
+    API_URL = "https://api-inference.huggingface.co/models/ZB-Tech/Text-to-Image"
     headers = {"Authorization": "Bearer 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"}
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.content
@@ -137,8 +139,8 @@ def query(payload):
 
 @login_required(login_url="/login_page")
 def experiment(request):
-    image = None
-    audio = None
+    image_path = None
+    audio_path = None
 
     if request.method == "POST":
         text1 = request.POST.get('text1')
@@ -146,16 +148,16 @@ def experiment(request):
 
 
         if text1:
-            query_test = Expriment(text = text1)
-            # image_bytes = query({"inputs":text1})
-            # query_test.image.save("generative_image",ContentFile(image_bytes),save=True)
-            # image = query_test.image.url
+            query_test = Expriment(text=text1)
+            image_bytes = query({"inputs":text1})
+            image = Image.open(io.BytesIO(image_bytes))
+            image_path = save_inmemory_image_to_path(image)
         if text2:
             query_test = Expriment(text=text2)
-            # audio_bytes = text_to_musicBytes(text2)
-            # query_test.audio.save("generated_music.wav",ContentFile(audio_bytes),save=True)
-            # audio = query_test.audio.url
-    return render(request,"experiments.html",{"image":image,"audio":audio})
+            audio_bytes = text_to_musicBytes(text2)
+            print(audio_bytes)
+            
+    return render(request,"experiments.html",{"image":image_path,"audio":audio_path})
 
 def text_to_musicBytes(text):
      API_URL = "https://api-inference.huggingface.co/models/facebook/musicgen-small"
