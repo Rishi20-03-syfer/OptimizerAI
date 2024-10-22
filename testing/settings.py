@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [" RishiVyas.pythonanywhere.com."]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "multimodelTesting",
-    "PsudoTesting",
+    "PsudoTesting"
 ]
 
 MIDDLEWARE = [

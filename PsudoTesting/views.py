@@ -130,7 +130,7 @@ def feedback(request):
 
 def query(payload):
     API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer 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"}
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.content
 
@@ -140,25 +140,26 @@ def experiment(request):
     image = None
     audio = None
 
-    if request.POST:
+    if request.method == "POST":
         text1 = request.POST.get('text1')
         text2 = request.POST.get('text2')
-        
+
+
         if text1:
             query_test = Expriment(text = text1)
-            image_bytes = query({"inputs":text1})
-            query_test.image.save("generative_image",ContentFile(image_bytes),save=True)
-            image = query_test.image.url
+            # image_bytes = query({"inputs":text1})
+            # query_test.image.save("generative_image",ContentFile(image_bytes),save=True)
+            # image = query_test.image.url
         if text2:
-            audio_bytes = text_to_musicBytes(text2)
             query_test = Expriment(text=text2)
-            query_test.audio.save("generated_music.wav",ContentFile(audio_bytes),save=True)
-            audio = query_test.audio.url
+            # audio_bytes = text_to_musicBytes(text2)
+            # query_test.audio.save("generated_music.wav",ContentFile(audio_bytes),save=True)
+            # audio = query_test.audio.url
     return render(request,"experiments.html",{"image":image,"audio":audio})
 
 def text_to_musicBytes(text):
      API_URL = "https://api-inference.huggingface.co/models/facebook/musicgen-small"
-     headers = {"Authorization": "Bearer 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"}
+     headers = {"Authorization": "Bearer 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"}
      response = requests.post(API_URL, headers=headers, json={"inputs":text})
      return response.content    
    
