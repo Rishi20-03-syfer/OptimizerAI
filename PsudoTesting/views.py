@@ -1,6 +1,4 @@
 from PIL import Image
-import io
-from transformers import pipeline
 from django.shortcuts import render # for the html pages
 from .models import Content, Expriment        # model Content to store the data
 import google.generativeai as genai # google ai api     
