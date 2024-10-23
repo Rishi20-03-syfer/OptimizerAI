@@ -193,7 +193,8 @@
                     <button type="submit">Generate Image</button>
                     <div id="imageOutput" class="output">
                         {% if image %}
-                            <img src="{{ image }}" alt="Generated Image">
+                            <img src={{image}} alt="Generated Image">
+    
                         {% else %}
                             <p>No image generated yet.</p>
                         {% endif %}

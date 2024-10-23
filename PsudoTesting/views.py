@@ -1,7 +1,6 @@
 from PIL import Image
 import io
 from transformers import pipeline
-from django.conf import settings
 from django.shortcuts import render # for the html pages
 from .models import Content, Expriment        # model Content to store the data
 import google.generativeai as genai # google ai api     
@@ -14,13 +13,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.core.exceptions import ValidationError
-from django.contrib.auth.password_validation import validate_password
 import requests
-from transformers import AutoProcessor, MusicgenForConditionalGeneration
-from scipy.io import wavfile
-import torch
-import numpy as np
 from django.core.files.base import ContentFile
 
 try:
@@ -131,7 +124,7 @@ def feedback(request):
 
 
 def query(payload):
-    API_URL = "https://api-inference.huggingface.co/models/ZB-Tech/Text-to-Image"
+    API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
     headers = {"Authorization": "Bearer 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"}
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.content
@@ -145,18 +138,18 @@ def experiment(request):
     if request.method == "POST":
         text1 = request.POST.get('text1')
         text2 = request.POST.get('text2')
-
-
         if text1:
-            query_test = Expriment(text=text1)
-            image_bytes = query({"inputs":text1})
-            image = Image.open(io.BytesIO(image_bytes))
-            image_path = save_inmemory_image_to_path(image)
+             query_test = Expriment(text=text1)
+             image_bytes = query({"inputs": text1})
+             query_test.image.save("generated_image",ContentFile(image_bytes),save=True)
+             image_path = query_test.image.url
         if text2:
             query_test = Expriment(text=text2)
             audio_bytes = text_to_musicBytes(text2)
-            print(audio_bytes)
-            
+            query_test.audio.save("generated_audio",ContentFile(audio_bytes),save=True)
+            audio_path = query_test.audio.url
+            print(audio_path)
+
     return render(request,"experiments.html",{"image":image_path,"audio":audio_path})
 
 def text_to_musicBytes(text):
