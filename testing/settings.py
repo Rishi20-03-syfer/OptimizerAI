@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-*)lo=a6bi@(cmjwu)$qhwvqnu(mm50@k^9-cl9m*=d(aswb2au
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["optimizerai-production.up.railway.app"]
 
 
 # Application definition
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "PsudoTesting"
 ]
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = ['https://optimizerai-production.up.railway.app']
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
