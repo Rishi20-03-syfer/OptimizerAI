@@ -43,7 +43,7 @@ def index(request):
             response = mark_safe(f"{markdown.markdown(text)}<br>{forImage(text,image)}")
         else:
             response = "No data provided"
-    return render(request, "index2.html", context={"response": response})
+    return render(request, "index.html", context={"response": response})
 def forText(text):
     response = model.generate_content(text)
     return markdown.markdown(response.text)

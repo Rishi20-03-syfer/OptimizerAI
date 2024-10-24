@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-*)lo=a6bi@(cmjwu)$qhwvqnu(mm50@k^9-cl9m*=d(aswb2au
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["optimizerai-production.up.railway.app"]
+ALLOWED_HOSTS = ["optimizerai-production.up.railway.app","localhost","127.0.0.1"]
 
 
 # Application definition
@@ -58,7 +58,7 @@ ROOT_URLCONF = "testing.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR,"PsudoTesting/Templates")],
+        "DIRS": [os.path.join(BASE_DIR,"templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
