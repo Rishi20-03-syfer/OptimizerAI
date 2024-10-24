@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path("",include("PsudoTesting.urls")),
+    path("index",include("PsudoTesting.urls")),
     path("login_page/",include("PsudoTesting.urls")),
     path("register/",include("PsudoTesting.urls")),
     path("feedback/",include("PsudoTesting.urls")),
