@@ -137,17 +137,18 @@ def experiment(request):
         text1 = request.POST.get('text1')
         text2 = request.POST.get('text2')
         if text1:
-             query_test = Expriment(text=text1)
-             image_bytes = query({"inputs": text1})
-             query_test.image.save("generated_image",ContentFile(image_bytes),save=True)
-             image_path = query_test.image.url
+            #  query_test = Expriment(text=text1)
+            #  image_bytes = query({"inputs": text1})
+            #  query_test.image.save("generated_image",ContentFile(image_bytes),save=True)
+            #  image_path = query_test.image.url
+            print("Someone try to generate a image.")
         if text2:
-            query_test = Expriment(text=text2)
-            audio_bytes = text_to_musicBytes(text2)
-            query_test.audio.save("generated_audio",ContentFile(audio_bytes),save=True)
-            audio_path = query_test.audio.url
-            print(audio_path)
-
+            # query_test = Expriment(text=text2)
+            # audio_bytes = text_to_musicBytes(text2)
+            # query_test.audio.save("generated_audio",ContentFile(audio_bytes),save=True)
+            # audio_path = query_test.audio.url
+            # print(audio_path)
+            print("someone just try to generate a audio.")
     return render(request,"experiments.html",{"image":image_path,"audio":audio_path})
 
 def text_to_musicBytes(text):
