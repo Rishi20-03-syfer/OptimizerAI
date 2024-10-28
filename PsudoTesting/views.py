@@ -30,6 +30,7 @@ def index(request):
         text = request.POST.get("text")
         file = request.FILES.get("file")
         image = request.FILES.get("image")
+        text = text.strip() 
         query = Content(text=text)
 
         if text and not file and not image:

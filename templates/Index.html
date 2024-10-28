@@ -144,6 +144,7 @@
         .sidenav a:hover {
             color: var(--color-accent);
         }
+
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -166,6 +167,9 @@
             top: 20px;
             left: 20px;
             z-index: 2;
+        }
+        .recording {
+            animation: pulse 1s infinite;
         }
     </style>
 </head>
@@ -235,6 +239,39 @@
     </div>
 
     <script>
+        let isRecording = false;
+
+        function voice() {
+            const recordButton = document.getElementById('recordButton');
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-GB";
+            
+            if (!isRecording) {
+                recognition.start();
+                recordButton.textContent = "Recording...";
+                recordButton.classList.add('recording');
+                isRecording = true;
+            } else {
+                recognition.stop();
+                recordButton.textContent = "Start Recording";
+                recordButton.classList.remove('recording');
+                isRecording = false;
+            }
+
+            recognition.onresult = function(event) {
+                console.log(event);
+                document.getElementById('textInput').value = event.results[0][0].transcript;
+                recordButton.textContent = "Start Recording";
+                recordButton.classList.remove('recording');
+                isRecording = false;
+            }
+
+            recognition.onend = function() {
+                recordButton.textContent = "Start Recording";
+                recordButton.classList.remove('recording');
+                isRecording = false;
+            }
+        }
         document.getElementById('imageInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -254,19 +291,11 @@
         document.getElementById('documentInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
-                document.getElementById('documentName').textContent = `Selected file: ${file.name}`;
+                document.getElementById('documentName').textContent = file.name.length>15
+                                                                    ?file.name.slice(0,12)+"..."
+                                                                    : file.name;
             }
         });
-
-        function voice(){
-            var recognition = new webkitSpeechRecognition();
-            recognition.lang = "en-GB";
-            recognition.onresult = function(event){
-                console.log(event);
-                document.getElementById('textInput').value = event.results[0][0].transcript;
-            }
-            recognition.start();
-        }
 
         const autoGrowInput = document.querySelector('.auto-grow-input');
 
