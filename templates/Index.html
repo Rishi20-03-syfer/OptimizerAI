@@ -171,8 +171,25 @@
         .recording {
             animation: pulse 1s infinite;
         }
+        .deSelectButton{
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+            border: none;
+            width: 70px;
+            height: 24px;
+            border-radius: 10%;
+            font-size: 16px;
+            margin: 10px 0 0 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .deSelectButton:hover{
+            background-color: var(--color-accent);
+        }
     </style>
 </head>
+
 <body>  
     <span id="openNav" onclick="openNav()">&#9776;</span>
 
@@ -205,6 +222,7 @@
                         <div class="input-group">
                             <input name="image" type="file" accept="image/*" id="imageInput" hidden>
                             <button type="button" class="file-input-button" onclick="document.getElementById('imageInput').click()">Choose Image</button>
+                            <button type="button" class = "deSelectButton"id="deSelectImage"style="display: none;">Deselect</button>
                         </div>
                         <div id="imagePreview"></div>
                     </div>
@@ -214,6 +232,7 @@
                         <div class="input-group">
                             <input name="file" type="file" accept=".docx,.pdf,.txt" id="documentInput" hidden>
                             <button type="button" class="file-input-button" onclick="document.getElementById('documentInput').click()">Choose Document</button>
+                            <button type="button" id ="deSelectFile" class = "deSelectButton" style="display: none;">Deselect</button>
                         </div>
                         <div id="documentName"></div>
                     </div>
@@ -283,6 +302,7 @@
                     const previewDiv = document.getElementById('imagePreview');
                     previewDiv.innerHTML = '';
                     previewDiv.appendChild(img);
+                    document.getElementById("deSelectImage").style.display = "inline-flex";
                 }
                 reader.readAsDataURL(file);
             }
@@ -294,6 +314,7 @@
                 document.getElementById('documentName').textContent = file.name.length>15
                                                                     ?file.name.slice(0,12)+"..."
                                                                     : file.name;
+                document.getElementById('deSelectFile').style.display ="inline-flex";
             }
         });
 
@@ -317,6 +338,19 @@
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
         }
+        function deSelectImage(){
+            document.getElementById("imageInput").value = '';
+            document.getElementById("imagePreview").innerHTML = '';
+            document.getElementById("deSelectImage").style.display = "none";
+        }
+        function deSelectFile(){
+            document.getElementById("documentInput").value = '';
+            document.getElementById("documentName").textContent = '';
+            document.getElementById("deSelectFile").style.display = 'none';
+        }
+
+        document.getElementById('deSelectImage').addEventListener("click",deSelectImage);
+        document.getElementById('deSelectFile').addEventListener("click",deSelectFile);
     </script>
 </body>
 </html>
