@@ -79,7 +79,7 @@ WSGI_APPLICATION = "testing.wsgi.application"
 
 DATABASES = {
     "default": {
-        "default":dj_database_url("postgresql://postgres:TVbytkacOoInUFnhSNrTSMurZqZfUkgU@postgres.railway.internal:5432/railway")
+        "default":dj_database_url.parse("postgresql://postgres:TVbytkacOoInUFnhSNrTSMurZqZfUkgU@postgres.railway.internal:5432/railway")
         # "ENGINE": "django.db.backends.postgresql",
         # "NAME": "djangoproject",
         # "USER":"postgres",
