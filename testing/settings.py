@@ -79,7 +79,8 @@ WSGI_APPLICATION = "testing.wsgi.application"
 
 DATABASES = {
     "default": {
-        "default":dj_database_url.parse("postgresql://postgres:TVbytkacOoInUFnhSNrTSMurZqZfUkgU@postgres.railway.internal:5432/railway")
+        "default":dj_database_url.parse("postgresql://postgres:TVbytkacOoInUFnhSNrTSMurZqZfUkgU@postgres.railway.internal:5432/railway",
+                                         engine="django.db.backends.postgresql")
         # "ENGINE": "django.db.backends.postgresql",
         # "NAME": "djangoproject",
         # "USER":"postgres",
@@ -88,7 +89,6 @@ DATABASES = {
         # "PORT":"5432"
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
