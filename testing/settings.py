@@ -79,14 +79,14 @@ WSGI_APPLICATION = "testing.wsgi.application"
 
 DATABASES = {
     "default": {
-        "default":dj_database_url.parse("postgresql://postgres:TVbytkacOoInUFnhSNrTSMurZqZfUkgU@postgres.railway.internal:5432/railway",
-                                         engine="django.db.backends.postgresql")
-        # "ENGINE": "django.db.backends.postgresql",
-        # "NAME": "djangoproject",
-        # "USER":"postgres",
-        # "PASSWORD":"R!$H!2003",
-        # "HOST":"localhost",
-        # "PORT":"5432"
+        # "default":dj_database_url.parse("postgresql://postgres:TVbytkacOoInUFnhSNrTSMurZqZfUkgU@postgres.railway.internal:5432/railway",
+        #                                  engine="django.db.backends.postgresql")
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "djangoproject",
+        "USER":"postgres",
+        "PASSWORD":"R!$H!2003",
+        "HOST":"localhost",
+        "PORT":"5432"
     }
 }
 
