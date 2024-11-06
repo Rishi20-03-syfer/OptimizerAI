@@ -20,7 +20,7 @@ try:
 except Exception as e:
     print( f"Api key fault {e}")
 
-response=""+str(os.getenv("DATABASE_URL"))
+response=""
 
 @login_required(login_url="/login_page")
 def index(request):
